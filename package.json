@@ -1,0 +1,13 @@
+{
+  "name": "browserify-test",
+  "version": "0.0.1",
+  "dependencies": {
+    "uniq": "latest"
+  },
+  "devDependencies": {
+  	"grunt": "~0.4",
+  	"load-grunt-tasks": "~0.2",
+  	"grunt-contrib-watch": "~0.5",
+    "grunt-browserify": "~2.0"
+  }
+}
