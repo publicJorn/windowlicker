@@ -5,6 +5,29 @@ module.exports = function (grunt) {
 
 	grunt.initConfig({
 
+		d: {
+			src: 'src',
+			// test: 'test',
+			dist: 'dist'
+		},
+
+		connect: {
+			options: {
+				port: 9000,
+				livereload: 35729,
+				hostname: '0.0.0.0' // change this to 'localhost' to restrict access
+			},
+			serve: {
+				options: {
+					// open: true,
+					base: [
+						'<%= d.src %>',
+						'examples'
+					]
+				}
+			}
+		},
+
 		watch: {
 			options: {
 				spawn: false,
@@ -12,9 +35,14 @@ module.exports = function (grunt) {
 			},
 			js: {
 				files: [
-					'js/*.js'
+					'<%= d.src %>/*.js'
 				],
 				tasks: ['browserify']
+			},
+			dev: {
+				files: [
+					'examples/*.html'
+				]
 			}
 		},
 
@@ -23,22 +51,23 @@ module.exports = function (grunt) {
 				debug: true,
 			},
 			dev: {
-				src: ['js/main.js'],
-				dest: 'js/bundle.js'
+				src: ['<%= d.src %>/index.js'],
+				dest: '<%= d.dest %>/windowlicker.js'
 			},
-			production: {
-				options: {
-					debug: false
-				},
-				src: '<%= browserify.dev.src %>',
-				dest: 'js/bundle.js'
-			}
+			// deploy: {
+			// 	options: {
+			// 		debug: false
+			// 	},
+			// 	src: '<%= browserify.dev.src %>',
+			// 	dest: '<%= d.src %>/bundle.js'
+			// }
 		}
 
 	});
 
 	grunt.registerTask('serve', [
 		'browserify:dev',
+		'connect:serve',
 		'watch'
 	]);
 

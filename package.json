@@ -1,13 +1,12 @@
 {
-  "name": "browserify-test",
+  "name": "windowlicker",
   "version": "0.0.1",
-  "dependencies": {
-    "uniq": "latest"
-  },
+  "dependencies": {},
   "devDependencies": {
-  	"grunt": "~0.4",
-  	"load-grunt-tasks": "~0.2",
-  	"grunt-contrib-watch": "~0.5",
-    "grunt-browserify": "~2.0"
+    "grunt": "~0.4",
+    "load-grunt-tasks": "~0.2",
+    "grunt-contrib-watch": "~0.5",
+    "grunt-browserify": "~2.0",
+    "grunt-contrib-connect": "~0.7.1"
   }
 }

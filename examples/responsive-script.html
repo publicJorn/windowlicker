@@ -6,8 +6,10 @@
 
 		<style>
 			body::after {
-				/*position: absolute;
-				left: -99999px;*/
+				/*
+				position: absolute;
+				left: -99999px;
+				*/
 				content: 'small';
 			}
 			@media all and (min-width:1024px) {
@@ -18,9 +20,19 @@
 		</style>
 	</head>
 	<body>
+		<h1>How this should work for the different situations:</h1>
+		<p>only modern browsers (IE >= 10)</p>
+		<ul>
+			<li>1 file: windowlicker, uses native window.matchMedia</li>
+		</ul>
 
+		<p></p>
+		<ul>
+			<li></li>
+		</ul>
 
-		<script src="../src/responsive-script.js"></script>
+		<script src="matchMedia.js"></script>
+		<script src="responsive-script.js"></script>
 		<script>
 		responsiveScript.on('large', function() {
 			console.log('I am large');
