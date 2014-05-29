@@ -1,0 +1,25 @@
+body::before {
+/*
+	position: absolute;
+	left: -99999px;
+	visibility: hidden;
+*/
+}
+
+@media screen and (min-width: 0px) {
+	body::before {
+		content: 'small';
+	}
+}
+/*
+@media screen and (min-width: 600px) {
+	body::before {
+		content: 'medium';
+	}
+}
+*/
+@media screen and (min-width: 600px) {
+	body::before {
+		content: 'large';
+	}
+}
