@@ -7,6 +7,18 @@
  */
 var windowlicker = require('../src/windowlicker');
 
+windowlicker.when('small', {
+	on: function() {
+		console.log('I am small');
+	}
+});
+
+windowlicker.when('small', {
+	on: function() {
+		console.log('I just want to tell again how small I am');
+	}
+});
+
 windowlicker.when('large', {
 	on: function() {
 		console.log('I am large');
@@ -22,16 +34,4 @@ windowlicker.when('large', {
 		console.log('You only see me when resizing to large');
 	},
 	defer: true
-});
-
-windowlicker.when('small', {
-	on: function() {
-		console.log('I am small');
-	}
-});
-
-windowlicker.when('small', {
-	on: function() {
-		console.log('I just want to tell again how small I am');
-	}
 });
