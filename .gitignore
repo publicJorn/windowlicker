@@ -22,3 +22,6 @@ Thumbs.db
 
 node_modules
 dist
+_server
+examples
+_related
