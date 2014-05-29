@@ -4,13 +4,13 @@ Gateway to responsive javascript
 
 When creating responsive web pages, we use media queries to make our page look different depending on available screen size.
 
-Our javascript often also needs to know about the current state of the page, in order to properly initialise, display or animate an element.
+Our javascript often also needs to know about the current state of the page, in order to properly initialise, display or animate content.
 
-I created WindowLicker as a sollution that builds on these principles:
+WindowLicker offers a sollution that builds on these principles:
 
 - Small screens first (avoiding buzzwords here) ;)
 - Sizes are given in a single place. This should be in CSS
-- Legacy browsers should fall back to rendering the desktop- or large version always
+- Legacy browsers should fall back to rendering the desktop- or large version
 
 ## Examples
 
