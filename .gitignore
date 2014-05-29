@@ -21,6 +21,5 @@ Thumbs.db
 .tmp
 
 node_modules
-dist
 _server
 _related
