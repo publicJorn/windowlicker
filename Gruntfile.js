@@ -50,15 +50,13 @@ module.exports = function (grunt) {
 		},
 
 		clean: {
-			files: ['<%= d.dev %>', '<%= d.dist %>']
+			dev: ['<%= d.dev %>'],
+			release: ['<%= d.dist %>']
 		},
 
 		browserify: {
 			options: {
-				debug: true,
-				// bundleOptions: {
-				// 	debug: true
-				// }
+				debug: true
 			},
 			dev: {
 				files: {
@@ -78,30 +76,51 @@ module.exports = function (grunt) {
 					]
 				}
 			},
-			// deploy: {
-			// 	options: {
-			// 		debug: false
-			// 	},
-			// 	src: '<%= browserify.dev.src %>',
-			// 	dest: '<%= d.src %>/bundle.js'
-			// }
-		}
+			release: {
+				options: {
+					debug: false,
 
+				},
+				files: {
+					'<%= d.dist %>/windowlicker.js': [
+						'<%= d.src %>/windowlicker.js'
+					],
+					'<%= d.dist %>/windowlicker-sa.js': [
+						'<%= d.src %>/windowlicker-standalone.js'
+					],
+					'<%= d.dist %>/windowlicker-sa-ie.js': [
+						'<%= d.src %>/matchMedia.js',
+						'<%= d.src %>/windowlicker-standalone.js'
+					]
+				}
+			}
+		},
+
+		uglify: {
+			release: {
+				files: [{
+					expand: true,
+          cwd: '<%= d.dist %>',
+          src: '*.js',
+          dest: '<%= d.dist %>'
+				}]
+			}
+		},
 	});
 
 	grunt.registerTask('dev', [
 		'clean',
-		'browserify',
+		'browserify:dev',
+		'browserify:standalone',
 		'connect:dev',
 		'watch'
 	]);
 
-	// grunt.registerTask('standalone', [
-	// 	'clean',
-	// 	'browserify:standalone',
-	// 	'connect:dev',
-	// 	'watch'
-	// ]);
+	grunt.registerTask('release', [
+		'clean:release',
+		'browserify:release',
+		'uglify'
+	]);
 
 	grunt.registerTask('default', 'dev');
 };
