@@ -1,6 +1,6 @@
 # windowlicker
 
-Gateway to responsive javascript
+Gateway to responsive javascript (named after an awesome song by Aphrodite).
 
 When creating responsive web pages, we use media queries to make our page look different depending on available screen size.
 
