@@ -52,6 +52,15 @@ Hook into these sizes in javascript:
     	legacy: true // legacy browsers should always init the code in "on()"
     });
 
+### See the examples live
+
+Feel free to download the source and play around. Any suggestions? Please file an issue/pull-request
+
+- fork, clone or download the source
+- `npm install`
+- `grunt`
+- open `localhost:9000` in your browser
+
 ## Different builds
 
 Choose the build that suits your needs:
