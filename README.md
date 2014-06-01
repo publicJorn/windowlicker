@@ -1,31 +1,32 @@
 # windowlicker
 
-Gateway to responsive javascript (named after an awesome song by Aphrodite).
+For responsive javascript
 
 When creating responsive web pages, we use media queries to make our page look different depending on available screen size.
 
-Our javascript often also needs to know about the current state of the page, in order to properly initialise, display or animate content.
+Our javascript often also needs to know about the current state of the page, in order to properly initialize, display or animate content.
 
-WindowLicker offers a sollution that builds on these principles:
+WindowLicker offers a solution using these principles:
 
 - Small screens first (avoiding buzzwords here) ;)
 - Sizes are given in a single place. This should be in CSS
 - Legacy browsers should fall back to rendering the desktop- or large version
 
-## Examples
+## How to...
 
-In the example folder the following use case is shown, but using 3 different builds of this script (read more about builds below).
+Windowlicker supports commonJS, AMD and can work on it's own (in script tag). It reads the proper size from css on window resize and your functionality hooks into this, following the pub/sub pattern. Have a look:
 
 ### CSS
 
 Set available sizes in css:
 
-    body::before {
+	body::before {
     	position: absolute;
     	left: -99999px;
     	visibility: hidden;
     }
 
+	/* add as many sizes as you want */
     @media screen and (min-width: 0px) {
     	body::before {
     		content: 'small';
@@ -52,33 +53,41 @@ Hook into these sizes in javascript:
     	legacy: true // legacy browsers should always init the code in "on()"
     });
 
-### See the examples live
+### Play around with it yourself
 
 Feel free to download the source and play around. Any suggestions? Please file an issue/pull-request
 
 - fork, clone or download the source
 - `npm install`
 - `grunt`
-- open `localhost:9000` in your browser
+- open `functional-test/browserify.html` in your browser. For development I'm just making use of this file. If you want to run the stand alone version, run `grunt release` first.
 
 ## Different builds
 
 Choose the build that suits your needs:
 
-### Standalone - Only modern browsers (IE >= 10)
-
-- 1 file: `windowlicker.js`
-- Uses native window.matchMedia and window.addEventListener
-
-### Standalone - Support for IE9 and partial IE8
-
-- 1 file: `windowlicker-ie.js`
-- Uses some polyfills
-- IE8 and older will default to largest screen size (set on init)
-- Filesize is increased by ~x Kb
-
 ### As node module
 
-- Use windowlicker in your own buildprocess
-- Support for: browserify (requirejs is coming...)
-- Complete control over optimization; have a look at the source code to see current build options (I'm using grunt)
+- Include in your project `npm install windowlicker --save` (--save includes it in your package.json's dependencies)
+- `var windowlicker = require('windowlicker');`
+
+### Standalone
+
+- You may want to download windowlicker and include it in a script tag (or some other way)
+- [minified](https://raw.githubusercontent.com/publicJorn/windowlicker/master/dist/windowlicker.min.js) (1.24Kb or 343b gzipped)
+- [development version](https://raw.githubusercontent.com/publicJorn/windowlicker/master/dist/windowlicker.js)
+
+### Standalone with matchMedia polyfill baked in!
+
+In case you don't want to polyfill yourself!
+
+- 1 file: `windowlicker-matchmedia-pkg.js`
+- Uses matchMedia polyfill
+- IE8 and older will default to largest screen size (set on init)
+- [minified](https://raw.githubusercontent.com/publicJorn/windowlicker/master/dist/windowlicker.min.js) (1.83Kb or 487b gzipped)
+- [development version](https://raw.githubusercontent.com/publicJorn/windowlicker/master/dist/windowlicker.js)
+
+## What's in a name?
+Why windowlicker?
+
+Well.. we are working with the window and when naming this thing I just happened to listen to [Window Licker by Aphex Twin](http://open.spotify.com/track/60Pe9j2pCBa4Zp4ztf5nhd). True story ;)
