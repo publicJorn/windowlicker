@@ -5,31 +5,24 @@ module.exports = function (grunt) {
 
 	grunt.initConfig({
 
+		pkg: grunt.file.readJSON('package.json'),
+
+		meta: {
+			banner: '/*!\n' +
+			' * <%= pkg.name %> v<%= pkg.version %> - <%= pkg.description %>\n' +
+			' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> - <%= pkg.homepage %>\n' +
+			' * License: <%= _.map(pkg.licenses, function(x) {return x.type + " (" + x.url + ")";}).join(", ") %>\n' +
+			' */\n\n',
+			standalone_name: '<%= pkg.name %>-matchmedia-pkg'
+		},
+
 		d: {
 			src: 'src',
-			srcExamples: 'examples-src',
-			dev: '_server',
-			test: 'examples',
+			test: 'functional-test',
 			dist: 'dist'
 		},
 
-		connect: {
-			options: {
-				port: 9000,
-				livereload: 35729,
-				hostname: '0.0.0.0' // change this to 'localhost' to restrict access
-			},
-			dev: {
-				options: {
-					// open: true,
-					base: [
-						'<%= d.dev %>',
-						'<%= d.test %>'
-					]
-				}
-			}
-		},
-
+		// -- DEV --
 		watch: {
 			options: {
 				spawn: false,
@@ -39,18 +32,12 @@ module.exports = function (grunt) {
 				files: [
 					'<%= d.src %>/*.js'
 				],
-				tasks: ['browserify']
-			},
-			dev: {
-				files: [
-					'<%= d.srcExamples %>/*.js',
-					'<%= d.test %>/*.html'
-				]
+				tasks: ['rig:dist', 'browserify', 'clean:release']
 			}
 		},
 
 		clean: {
-			dev: ['<%= d.dev %>'],
+			dev: ['<%= d.test %>/js/main-build.js'],
 			release: ['<%= d.dist %>']
 		},
 
@@ -60,65 +47,63 @@ module.exports = function (grunt) {
 			},
 			dev: {
 				files: {
-					'<%= d.dev %>/main-build.js': [
-						'<%= d.srcExamples %>/main.js'
+					'<%= d.test %>/js/main-build.js': [
+						'<%= d.test %>/js/main.js'
+					]
+				}
+			}
+		},
+
+		// -- DEPLOY --
+		rig: {
+			options : {
+				banner : '<%= meta.banner %>'
+			},
+			dist: {
+				files: {
+					'<%= d.dist %>/windowlicker.js' : [
+						'<%= d.src %>/wrapper.js'
 					]
 				}
 			},
 			standalone: {
 				files: {
-					'<%= d.dev %>/windowlicker.js': [
-						'<%= d.src %>/windowlicker-standalone.js'
-					],
-					'<%= d.dev %>/windowlicker-ie.js': [
-						'<%= d.src %>/matchMedia.js',
-						'<%= d.src %>/windowlicker-standalone.js'
-					]
-				}
-			},
-			release: {
-				options: {
-					debug: false,
-
-				},
-				files: {
-					'<%= d.dist %>/windowlicker.js': [
-						'<%= d.src %>/windowlicker.js'
-					],
-					'<%= d.dist %>/windowlicker-sa.js': [
-						'<%= d.src %>/windowlicker-standalone.js'
-					],
-					'<%= d.dist %>/windowlicker-sa-ie.js': [
-						'<%= d.src %>/matchMedia.js',
-						'<%= d.src %>/windowlicker-standalone.js'
+					'<%= d.dist %>/windowlicker-matchmedia-pkg.js' : [
+						'<%= d.src %>/3rd-party/matchMedia.js',
+						'<%= d.src %>/wrapper.js'
 					]
 				}
 			}
 		},
 
 		uglify: {
+			options : {
+				banner : '<%= meta.banner %>',
+				report: 'gzip'
+			},
 			release: {
-				files: [{
-					expand: true,
-          cwd: '<%= d.dist %>',
-          src: '*.js',
-          dest: '<%= d.dist %>'
-				}]
+				files: {
+					'<%= d.dist %>/<%= pkg.name %>.min.js': '<%= d.dist %>/<%= pkg.name %>.js',
+					'<%= d.dist %>/<%= meta.standalone_name %>.min.js': '<%= d.dist %>/<%= meta.standalone_name %>.js'
+				}
 			}
-		},
+		}
 	});
 
-	grunt.registerTask('dev', [
+	grunt.registerTask('devBuild', [
 		'clean',
-		'browserify:dev',
-		'browserify:standalone',
-		'connect:dev',
+		'rig:dist',
+		'browserify:dev'
+	]);
+
+	grunt.registerTask('dev', [
+		'devBuild',
 		'watch'
 	]);
 
 	grunt.registerTask('release', [
 		'clean:release',
-		'browserify:release',
+		'rig',
 		'uglify'
 	]);
 

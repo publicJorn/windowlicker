@@ -1,14 +1,25 @@
 {
   "name": "windowlicker",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "For responsive javascript",
+  "author": {
+    "name": "Jorn Luiten"
+  },
+  "homepage": "https://github.com/publicJorn/windowlicker",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4",
     "grunt-browserify": "~2.0",
     "grunt-contrib-clean": "~0.5",
-    "grunt-contrib-connect": "~0.7.1",
-    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-uglify": "~0.4",
     "grunt-contrib-watch": "~0.5",
+    "grunt-rigger": "~0.6",
     "load-grunt-tasks": "~0.2"
   }
 }
