@@ -1,9 +1,8 @@
 body::before {
-/*
+/* Commented out to show how it works */
 	position: absolute;
 	left: -99999px;
 	visibility: hidden;
-*/
 }
 
 @media screen and (min-width: 0px) {

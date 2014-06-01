@@ -5,7 +5,7 @@
  * NOTE: If you have windowlicker as a node dependency, you can
  * just use: `require(windowlicker)` or `require(windowlicker-ie)`
  */
-var windowlicker = require('../src/windowlicker');
+var windowlicker = require('../../dist/windowlicker');
 
 windowlicker.when('small', {
 	on: function() {

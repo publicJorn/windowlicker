@@ -1,1 +1,0 @@
-global.windowlicker = require('./windowlicker');

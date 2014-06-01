@@ -1,12 +1,13 @@
 var
+	windowlicker,
 	currentScreenSize = null,
 	isLegacyBrowser = false,
 	buffer,
 	fnCache = {};
 
 // We use matchMedia to check mediequery support
-// For IE9 use matchMedia. If no media queries are supported or matchMedia is not found,
-// supply the `legacy` option in windowlicker.when() to activate code for old browsers
+// If no media queries are supported or matchMedia is not found, supply the `legacy`
+// option in windowlicker.when() to activate specific code for old browsers
 if(!window.matchMedia || !window.matchMedia('only all').matches) {
 	isLegacyBrowser = true;
 }
@@ -21,9 +22,8 @@ if (!isLegacyBrowser) {
 	checkScreenSize(); // Initially set so windowlicker.getScreenSize() can be called
 }
 
-
-// Expose windowlicker
-module.exports = {
+// This object will be exposed @ the bottom
+windowlicker = {
 	/**
 	 * Register functionality bound to a certain screen size
 	 * @param  {string} size    eg. `large` -should match a value set in CSS
@@ -54,7 +54,7 @@ function checkScreenSize() {
 	var
 		oldSize = currentScreenSize,
 		newSize = window.getComputedStyle(document.body,':before').getPropertyValue('content')
-		.replace(/[\"\'']/g, ''); // Remove quotes
+			.replace(/[\"\'']/g, ''); // Remove quotes
 
 	// Publish for affected sizes (in case of > 2 sizes, we don't want to touch others)
 	if (newSize !== currentScreenSize) {
@@ -124,28 +124,5 @@ function SizeHandler(size, options) {
 	} else
 	if (!options.defer && this.match()) {
 		this.on();
-	}
-}
-
-
-// --- UTIL ---
-
-/**
- * Iterate over collection
- * @param  {mixed}    collection Array or 1 key deep object literal
- * @param  {Function} fn         Call this function for each. If function returns false the loop will break
- * @return {void}
- */
-function each(collection, fn) {
-	var
-		i = 0,
-		l = collection.length,
-		cont;
-
-	for (; i < l; i++) {
-		cont = fn(collection[i], i);
-		if (cont === false) {
-			break; //allow early exit
-		}
 	}
 }
