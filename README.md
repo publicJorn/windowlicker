@@ -70,12 +70,14 @@ Choose the build that suits your needs:
 
 - Include in your project `npm install windowlicker --save` (--save includes it in your package.json's dependencies)
 - `var windowlicker = require('windowlicker');`
+- (conditionally) include a polyfill for matchMedia to support older browsers [check caniuse.com](http://caniuse.com/matchmedia)
 
 ### Standalone
 
 - You may want to download windowlicker and include it in a script tag (or some other way)
 - [minified](https://raw.githubusercontent.com/publicJorn/windowlicker/master/dist/windowlicker.min.js) (1.24Kb or 343b gzipped)
 - [development version](https://raw.githubusercontent.com/publicJorn/windowlicker/master/dist/windowlicker.js)
+- (conditionally) include a polyfill for matchMedia to support older browsers [check caniuse.com](http://caniuse.com/matchmedia)
 
 ### Standalone with matchMedia polyfill baked in!
 
