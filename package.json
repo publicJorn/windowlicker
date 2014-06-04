@@ -1,6 +1,6 @@
 {
   "name": "windowlicker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "For responsive javascript",
   "author": {
     "name": "Jorn Luiten",
@@ -13,10 +13,10 @@
       "url": "http://www.opensource.org/licenses/mit-license.php"
     }
   ],
-	"repository" : {
-		"type" : "git",
-		"url" : "https://github.com/publicJorn/windowlicker"
-	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/publicJorn/windowlicker"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4",
