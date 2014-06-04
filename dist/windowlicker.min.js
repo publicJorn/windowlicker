@@ -1,5 +1,5 @@
 /*!
- * windowlicker v0.1.1 - For responsive javascript
+ * windowlicker v0.1.2 - For responsive javascript
  * Copyright (c) 2014 Jorn Luiten - https://github.com/publicJorn/windowlicker
  * License: MIT (http://www.opensource.org/licenses/mit-license.php)
  */

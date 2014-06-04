@@ -104,8 +104,14 @@ module.exports = function (grunt) {
 	grunt.registerTask('release', [
 		'clean:release',
 		'rig',
-		'uglify'
+		'uglify',
+		'nextsteps'
 	]);
 
 	grunt.registerTask('default', 'dev');
+	grunt.registerTask('nextsteps', function() {
+		grunt.log.writeln('To release:');
+		grunt.log.writeln('`npm version patch|minor|major [-m "Version: %s"]`');
+		grunt.log.writeln('`npm publish` (needs authentication)');
+	});
 };
