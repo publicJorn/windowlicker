@@ -7,31 +7,40 @@
  */
 var windowlicker = require('../../dist/windowlicker');
 
+function echo(str) {
+	var
+		p = document.createElement('p'),
+		t = document.createTextNode(str);
+
+	p.appendChild(t);
+	document.getElementsByTagName('body')[0].appendChild(p);
+}
+
 windowlicker.when('small', {
 	on: function() {
-		console.log('I am small');
+		echo('I am small');
 	}
 });
 
 windowlicker.when('small', {
 	on: function() {
-		console.log('I just want to tell again how small I am');
+		echo('I just want to tell again how small I am');
 	}
 });
 
 windowlicker.when('large', {
 	on: function() {
-		console.log('I am large');
+		echo('I am large');
 	},
 	off: function() {
-		console.log('Noooooooow! You are killing largearrgbl..');
+		echo('Noooooooow! You are killing largearrgbl..');
 	},
 	legacy: true
 });
 
 windowlicker.when('large', {
 	on: function() {
-		console.log('You only see me when resizing to large');
+		echo('You only see me when resizing to large');
 	},
 	defer: true
 });
